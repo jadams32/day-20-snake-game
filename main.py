@@ -16,6 +16,12 @@ screen.tracer(0)
 # Create a row of turtles that act as our snake.
 snake = Snake()
 
+screen.listen()
+screen.onkey(key="Up", fun=up)
+screen.onkey(key="Down", fun=down)
+screen.onkey(key="Left", fun=turn_left)
+screen.onkey(key="Right", fun=turn_right)
+
 screen.update()
 
 # TODO: create snake food.
