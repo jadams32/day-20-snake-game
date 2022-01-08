@@ -1,7 +1,7 @@
 # On Day 20 of the 100 days of code I will be building a version of the classic game snake.
 # Built using turtle graphics, feel free to peak around at my code, and play the game!
 
-from turtle import Turtle, Screen
+from turtle import Screen
 import random
 from playsound import playsound
 from snake import Snake
