@@ -7,6 +7,7 @@ from playsound import playsound
 from snake import Snake
 import time
 
+
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
@@ -17,11 +18,10 @@ screen.tracer(0)
 snake = Snake()
 
 screen.listen()
-screen.onkey(key="Up", fun=up)
-screen.onkey(key="Down", fun=down)
-screen.onkey(key="Left", fun=turn_left)
-screen.onkey(key="Right", fun=turn_right)
-
+screen.onkey(fun=snake.up, key="Up")
+screen.onkey(fun=snake.down, key="Down")
+screen.onkey(fun=snake.turn_left, key="Left")
+screen.onkey(fun=snake.turn_right, key="Right")
 screen.update()
 
 # TODO: create snake food.
