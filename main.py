@@ -15,7 +15,7 @@ screen.tracer(0)
 
 # Create a row of turtles that act as our snake.
 snake = Snake()
-new_snake = snake.create_snake()
+
 screen.update()
 
 # TODO: create snake food.
@@ -28,7 +28,7 @@ playing = True
 while playing:
     screen.update()
     time.sleep(0.1)
-    snake.start_snake(new_snake)
+    snake.start_snake()
 
 
 screen.exitonclick()
