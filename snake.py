@@ -1,31 +1,36 @@
 from turtle import Turtle
 
-X_COORDINATES = [0, -20, -40]
+COORDINATES = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
 UP = 90
 DOWN = 270
 LEFT = 180
 RIGHT = 0
+
+
 class Snake:
 
     def __init__(self):
-        self.turtles = []
+        self.segments = []
         self.create_snake()
-        self.head = self.turtles[0]
+        self.head = self.segments[0]
 
     def create_snake(self):
-        for turtle in range(3):
-            new_snake_part = Turtle(shape="square")
-            new_snake_part.color("white")
-            new_snake_part.penup()
-            new_snake_part.goto(x=X_COORDINATES[turtle], y=0)
-            self.turtles.append(new_snake_part)
+        for location in COORDINATES:
+            self.new_snake_segment(location)
+
+    def new_snake_segment(self, location):
+        new_snake_part = Turtle(shape="square")
+        new_snake_part.color("white")
+        new_snake_part.penup()
+        new_snake_part.goto(location)
+        self.segments.append(new_snake_part)
 
     def start_snake(self):
-        for segment in range(len(self.turtles) - 1, 0, -1):
-            x_new = self.turtles[segment - 1].xcor()
-            y_new = self.turtles[segment - 1].ycor()
-            self.turtles[segment].goto(x_new, y_new)
+        for num in range(len(self.segments) - 1, 0, -1):
+            x_new = self.segments[num - 1].xcor()
+            y_new = self.segments[num - 1].ycor()
+            self.segments[num].goto(x_new, y_new)
         self.head.forward(MOVE_DISTANCE)
 
     def up(self):
@@ -45,3 +50,4 @@ class Snake:
             self.head.setheading(RIGHT)
 
     def ate_food(self):
+        self.new_snake_segment(self.segments[-1].position())

@@ -30,7 +30,7 @@ screen.update()
 
 
 
-# TODO: If food is collied with make snake longer
+
 # TODO: Detect collision with body or tail.
 # TODO: Add music.
 playing = True
@@ -41,6 +41,7 @@ while playing:
     if snake.head.distance(food) < 15:
         food.new_food()
         scoreboard.update_score()
+        snake.ate_food()
 
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
         playing = False
