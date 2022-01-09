@@ -6,6 +6,7 @@ import random
 from playsound import playsound
 from snake import Snake
 from food import Food
+from scoreboard import Scoreboard
 import time
 
 
@@ -18,6 +19,7 @@ screen.tracer(0)
 # Create a row of turtles that act as our snake.
 snake = Snake()
 food = Food()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(fun=snake.up, key="Up")
@@ -25,6 +27,7 @@ screen.onkey(fun=snake.down, key="Down")
 screen.onkey(fun=snake.turn_left, key="Left")
 screen.onkey(fun=snake.turn_right, key="Right")
 screen.update()
+
 
 
 # TODO: If food is collied with make snake longer
@@ -39,6 +42,7 @@ while playing:
     snake.start_snake()
     if snake.head.distance(food) < 15:
         food.new_food()
+        scoreboard.update_score()
 
 
 screen.exitonclick()
