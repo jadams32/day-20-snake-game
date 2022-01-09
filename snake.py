@@ -43,3 +43,5 @@ class Snake:
     def turn_right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def ate_food(self):
