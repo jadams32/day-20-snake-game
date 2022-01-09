@@ -31,20 +31,34 @@ screen.update()
 
 
 
-# TODO: Detect collision with body or tail.
+
 # TODO: Add music.
 playing = True
 while playing:
     screen.update()
     time.sleep(0.1)
     snake.start_snake()
+
+    # Check if snake collides with any food on the screen.
     if snake.head.distance(food) < 15:
         food.new_food()
         scoreboard.update_score()
         snake.ate_food()
 
+    # Check if the snake collides with the edge of the screen
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
         playing = False
         scoreboard.game_over()
 
+    if snake.head.ycor() > 290 or snake.head.ycor() < -290:
+        playing = False
+        scoreboard.game_over()
+
+    # Check if head collides with any part of the snake
+        for segment in snake.segments:
+            if segment == snake.head:
+                pass
+            elif snake.head.distance(segment) < 10:
+                playing = False
+                scoreboard.game_over()
 screen.exitonclick()
