@@ -28,10 +28,6 @@ screen.onkey(fun=snake.turn_left, key="Left")
 screen.onkey(fun=snake.turn_right, key="Right")
 screen.update()
 
-
-
-
-
 # TODO: Add music.
 playing = True
 while playing:
@@ -45,20 +41,24 @@ while playing:
         scoreboard.update_score()
         snake.ate_food()
 
-    # Check if the snake collides with the edge of the screen
-    if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        playing = False
-        scoreboard.game_over()
+    # Check if the snake collides with the horizontal edge of the screen.
+    if snake.head.xcor() > 290:
+        snake.head.goto(-290, 0)
 
+    if snake.head.xcor() < -290:
+        snake.head.goto(290, 0)
+
+    # Check if the snake collides with the vertical edge of the screen.
     if snake.head.ycor() > 290 or snake.head.ycor() < -290:
         playing = False
         scoreboard.game_over()
 
-    # Check if head collides with any part of the snake
+    # Check if head collides with any part of the snake.
         for segment in snake.segments:
             if segment == snake.head:
                 pass
             elif snake.head.distance(segment) < 10:
                 playing = False
                 scoreboard.game_over()
+
 screen.exitonclick()
