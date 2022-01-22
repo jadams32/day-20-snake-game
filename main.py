@@ -2,14 +2,12 @@
 # Built using turtle graphics, feel free to peak around at my code, and play the game!
 
 from turtle import Screen
-import random
-from playsound import playsound
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
 import time
 
-
+# Initializing the screen and titles.
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
@@ -21,6 +19,7 @@ snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
 
+# Initializing listening to keystrokes for the snake movement.
 screen.listen()
 screen.onkey(fun=snake.up, key="Up")
 screen.onkey(fun=snake.down, key="Down")
@@ -28,13 +27,14 @@ screen.onkey(fun=snake.turn_left, key="Left")
 screen.onkey(fun=snake.turn_right, key="Right")
 screen.update()
 
-# TODO: Add music.
+# Main game loop state variable.
 playing = True
+
+# Main game loop
 while playing:
     screen.update()
     time.sleep(0.1)
     snake.start_snake()
-
     # Check if snake collides with any food on the screen.
     if snake.head.distance(food) < 15:
         food.new_food()
@@ -50,15 +50,13 @@ while playing:
 
     # Check if the snake collides with the vertical edge of the screen.
     if snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        playing = False
-        scoreboard.game_over()
+        scoreboard.reset_score()
+        snake.reset_snake()
 
     # Check if head collides with any part of the snake.
-        for segment in snake.segments:
-            if segment == snake.head:
-                pass
-            elif snake.head.distance(segment) < 10:
-                playing = False
-                scoreboard.game_over()
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
+            scoreboard.reset_score()
+            snake.reset_snake()
 
 screen.exitonclick()
